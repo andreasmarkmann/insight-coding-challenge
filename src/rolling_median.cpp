@@ -27,10 +27,12 @@ int main(int argc, char* argv[]) {
   // vio.parseLine() reads a line and fills elements of vdt
   while( vio.parseLine(&vdt) ) {
     if( vdt.FlagAll == vdt.supplied ) {
-      vdt.cout();
+      // debug output
+//       vdt.cout();
       grp.process(&vdt);
       grp.output();
-      grp.test_output();
+      // debug output
+//       grp.test_output();
     }
   }
 

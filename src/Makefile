@@ -6,10 +6,10 @@ OBJ = rolling_median.o epochtime.o hashtable.o graph.o stringutils.o venmodata.o
 
 INC = -I/usr/local/include
 LIB = -lm
-CDBG = -g -ggdb
-#CDBG = -D{NDEBUG}
-COPT = -std=c++11
-#COPT = -std=c++11 -O2
+#CDBG = -g -ggdb
+CDBG = -DNDEBUG
+#COPT = -std=c++11
+COPT = -std=c++11 -O2
 
 CXX = g++
 CXXFLAGS = -DVERSION=\"$(MAJOR).$(MINOR).$(PATCH)\" $(CDBG) $(INC) $(COPT)

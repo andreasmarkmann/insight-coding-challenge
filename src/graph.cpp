@@ -100,7 +100,7 @@ void Graph::process(venmodata* vdt) {
       // It's our lucky day, new data is one minute or more newer
       // than all current data and we get to evict all data without
       // any bookkeeping! Yay!
-      std::cout << "Calling evictAll, YAY!" << std::endl;
+//       std::cout << "Calling evictAll, YAY!" << std::endl;
       evictAll();
     } else {
       // New data is a few seconds newer than any existing data,
@@ -117,8 +117,8 @@ void Graph::process(venmodata* vdt) {
         // As we are in else brach, wrap through zero, add just one minute
         newsec += MAXSEC;
       }
-      std::cout << "Calling evictSectab from " << currsec
-      << " to " << vdt->sec << std::endl;
+//       std::cout << "Calling evictSectab from " << currsec
+//       << " to " << vdt->sec << " aka " << newsec << std::endl;
       for( uint index = currsec + 1; index <= newsec; index++ ) {
         evictSectab(index % MAXSEC);
       }
@@ -130,18 +130,18 @@ void Graph::process(venmodata* vdt) {
   hashtype ehash = htb::mkhash2(vdt->actor, vdt->target);
   Node* mynode[EN] = {new Node(vdt->actor), new Node(vdt->target)};
   Edge* myedge = new Edge(mynode[0], mynode[1]);
-  std::cout << "Inserting at hash " << ehash << std::endl;
+//   std::cout << "Inserting at hash " << ehash << std::endl;
   insertEdge(myedge, vdt->sec, ehash);
 
   // test output
-  Hashtable* mysectab =
-    dynamic_cast<Hashtable*>(etab->getContent(vdt->sec));
-  List* mylist = dynamic_cast<List*>(mysectab->getContent(ehash));
-  Edge* mymyedge = dynamic_cast<Edge*>(mylist->getContent());
-  for(int ii = 0; ii < EN; ii++) {
-    std::cout << "Inserted " << mymyedge->getNode(ii)->getStr() << " ("
-    << mymyedge->getNode(ii)->getDeg() << ")" << std::endl;
-  }
+//   Hashtable* mysectab =
+//     dynamic_cast<Hashtable*>(etab->getContent(vdt->sec));
+//   List* mylist = dynamic_cast<List*>(mysectab->getContent(ehash));
+//   Edge* mymyedge = dynamic_cast<Edge*>(mylist->getContent());
+//   for(int ii = 0; ii < EN; ii++) {
+//     std::cout << "Inserted " << mymyedge->getNode(ii)->getStr() << " ("
+//     << mymyedge->getNode(ii)->getDeg() << ")" << std::endl;
+//   }
 }
 
 // Evict a single node from database and update degrees array
@@ -309,8 +309,8 @@ void Graph::evictAll() {
 void Graph::insertEdge(Edge* myedge, uint sec, hashtype ehash) {
 
   evictEdge(myedge, ehash);
-  std::cout << "State after evicting existing:" << std::endl;
-  test_output();
+//   std::cout << "State after evicting existing:" << std::endl;
+//   test_output();
 
   // Insert nodes and check if they pre-existed
   for(int ii = 0; ii < EN; ii++) {
